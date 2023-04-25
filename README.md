@@ -46,3 +46,14 @@ https://drive.google.com/file/d/1ijf922qVKOL4DmyEknEAiRdMZL7DTS76/view?usp=share
 
 PLEASE VIEW THE POC IMAGE ATTACHED FOR A DETAILED VIEW
 
+Impact:
+
+This attack is typically used as, or in conjunction with, social engineering because the attack is exploiting a code-based vulnerability and a user's trust. and a misconfiguration of the 404 page  can be used in phishing. Any user will trust blindly soon as he see this domain "*.itunes.apple.com"
+Fix & Mitigation:
+Fix the error pages and stop the user from text content injection.Either remove the page or stop the user at 404 error when he tries for text injection.
+Hope this report finds you useful and will be fixed soon.
+
+Thank You
+
+Have a great day!
+

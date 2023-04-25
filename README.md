@@ -1,57 +1,33 @@
 # unrestricted-file-upload-leads-to-stored-XSS-cross-site-scripting-stored-xss
 
-Summary:
+A file upload is a serious opportunity to find cross-site scripting (XSS) to a web application.
 
-When I was testing the domain, I came across the subdomain https://static.gc.apple.com/  Which showed me an Access denied error. So I tried typing random words in the URL and I saw that it was redirecting me to this page "This static.gc.apple.com page can’t be found No webpage was found for the web address". 
+As we know many web applications allow clients or their users to upload files for many different purposes and this is only the opportunity to find loopholes on them. so let’s see how to attack these entry points which allows files to upload there, for the purpose of finding XSS
 
-Then I injected ";" this symbol to the end of the URL, it is reflected on the page.
+Steps to reproduce:
 
-Using this bypass method I was able to inject content to the page after the ";" symbol.
+1. Go to the dashboard/profile page
 
-So that means it is vulnerable to Text injection or content spoofing.
+2. scroll down you will find the skipper license field , which contains file upload functions.
 
- Content spoofing, also referred to as content injection, "arbitrary text injection" or virtual defacement, is an attack targeting a user made possible by an injection vulnerability in a web application. When an application does not properly handle user-supplied data, an attacker can supply content to a web application, typically via a parameter value, that is reflected back to the user. This presents the user with a modified page under the context of the trusted domain.
+3. when I tried to upload html file it doesn't throwed an error message.
 
-
-Like other domains of apple with the same issue, stopped me from doing it, but this didn't. For ex: " https://streamingaudio.itunes.apple.com/ --> this domain too has the same issue, access denied error. But when you inject any text it will stop me and throw an error.
-
-Browser used:
-chrome
-
-Affected Resource(URL):
-https://static.gc.apple.com/
-
-Steps to reproduce
-1. Go to https://static.gc.apple.com/ you will see an Access Denied error on the page.
-2. In the URL type anything after the slash, and it will be redirected to the page(No webpage was found for the web address)
-3. Now using ; this symbol at the end of the URL. These can be bypassed.
-4. Text after ; will be reflected on the page.
-
-Expected results
-Access Denied
-You don't have permission to access this content.
+4. so i uploaded a xss file and opened that , yes it is stored and reflecting back.
 
 
-Actual results
-Access Denied
-You don't have permission to access "http://static.gc.apple.com/;Contentspoofingby_sharan" on this server.
+![image](https://user-images.githubusercontent.com/84071887/234311684-ca7f5bb8-f17f-4fc0-a7ab-cab63d86e64b.png)
 
+![image](https://user-images.githubusercontent.com/84071887/234311744-b8cfee20-cde2-4a29-b068-eb12f3469e92.png)
 
-Payload
-WeareundermaintenacesorryfortheinconveniencehappenYoucanaccesstheresourcehereiewww.attacker.com
+Impact :
 
+Successful exploitation of cross-site scripting vulnerabilities allows an attacker to run arbitrary script code in the context of the affected user. This can be used to compromise the integrity of content returned by the webserver to take over a user's session, and redirect the user to a malicious website.
 
-POC IMAGE :
-https://drive.google.com/file/d/1ijf922qVKOL4DmyEknEAiRdMZL7DTS76/view?usp=share_link
+References:
+1. https://portswigger.net/web-security/cross-site-scripting/stored
+2. https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload.
+3. https://hackerone.com/reports/831703
 
-PLEASE VIEW THE POC IMAGE ATTACHED FOR A DETAILED VIEW
-
-Impact:
-
-This attack is typically used as, or in conjunction with, social engineering because the attack is exploiting a code-based vulnerability and a user's trust. and a misconfiguration of the 404 page  can be used in phishing. Any user will trust blindly soon as he see this domain "*.itunes.apple.com"
-Fix & Mitigation:
-Fix the error pages and stop the user from text content injection.Either remove the page or stop the user at 404 error when he tries for text injection.
-Hope this report finds you useful and will be fixed soon.
 
 Thank You
 

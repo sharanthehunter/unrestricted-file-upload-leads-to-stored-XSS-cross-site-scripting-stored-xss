@@ -29,7 +29,7 @@ References:
 3. https://hackerone.com/reports/831703
 
 
-Thank You
+Thank You!
 
 Have a great day!
 
